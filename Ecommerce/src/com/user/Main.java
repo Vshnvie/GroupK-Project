@@ -14,10 +14,6 @@ public class Main {
          System.out.println("Enter the first name:");
          String firstName = scanner.nextLine();
 
-         
-         
-         
-         
          System.out.println("Enter the last name:");
          String lastName = scanner.nextLine();
 
