@@ -43,7 +43,7 @@ public class Main {
 		System.out.println("Enter your password:");
 		String loginPassword = scanner.next();
 
-		if (Userregistration.validate(username, password)) {
+		if (Userregistration.validate(loginUsername, loginPassword)) {
 			System.out.println("Login successful!");
 		} else {
 			System.out.println("Incorrect username or password. Please try again.");

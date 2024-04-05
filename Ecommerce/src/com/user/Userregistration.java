@@ -14,6 +14,8 @@ public class Userregistration {
 
 		PreparedStatement statement;
 		try {
+			cm.getConnection();
+			
 			statement = cm.getConnection().prepareStatement(sql);
 
 			statement.setInt(1, id);
@@ -39,6 +41,8 @@ public class Userregistration {
 		String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement statement;
 		try {
+			cm.getConnection();
+			
 			statement = cm.getConnection().prepareStatement(sql);
 
 			statement.setString(1, loginUsername);

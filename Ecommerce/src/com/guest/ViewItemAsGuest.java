@@ -1,21 +1,25 @@
-package com.user;
+package com.guest;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ViewItem {
+import com.user.CommonMethods;
 
+public class ViewItemAsGuest {
+	
 	CommonMethods cm = new CommonMethods();
 
-	public void viewItems() {
+	public void viewItem(int id) {
 
 		try {
-			String sql = "select * from products";
+			String sql = "select * from products where product id = ?";
 			
 			cm.getConnection();
 
 			PreparedStatement ps = cm.getConnection().prepareStatement(sql);
+			
+			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();
 			
@@ -38,5 +42,6 @@ public class ViewItem {
 		}
 
 	}
+
 
 }
