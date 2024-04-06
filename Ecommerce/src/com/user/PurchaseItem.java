@@ -1,33 +1,31 @@
 package com.user;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 public class PurchaseItem {
 	
-	ResultSet rs;
-	
 	public void userPurchaseItem(String userName) {
 		
-		CommonMethods cm = new CommonMethods();
+		HashMap<Integer, Integer> qty = new HashMap<>();
+		qty.put(14,10);
 		
-		cm.getConnection();
+		HashMap<String, HashMap<Integer, Integer>> purchaseItem = new HashMap<>();
 		
-		String query = "select *  from addToCart where username = ?";
+		purchaseItem.put(userName, qty);
+		 
+		Object s = purchaseItem.get(userName);
 		
-		try {
-			PreparedStatement ps = cm.getConnection().prepareStatement(query);
-			
-			ps.setString(1, userName);
-			
-			ResultSet rs = ps.executeQuery();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		System.out.println(s);
 	}
+	
+	public static void main(String [] args) {
+		PurchaseItem pi = new PurchaseItem();
+		pi.userPurchaseItem("Ram");
+	}
+	
+	
 
 }
