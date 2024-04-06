@@ -16,9 +16,15 @@ public class PurchaseItem {
 		
 		purchaseItem.put(userName, qty);
 		 
-		Object s = purchaseItem.get(userName);
+		HashMap<Integer, Integer> s = purchaseItem.get(userName);
 		
-		System.out.println(s);
+		Set sv = s.keySet();
+		
+		Iterator itr = sv.iterator();
+		
+		Object i = itr.next();
+		
+		System.out.println(i);
 	}
 	
 	public static void main(String [] args) {
