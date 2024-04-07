@@ -11,7 +11,7 @@ public class CommonMethods {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-	        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/userdetails", "root", "yes12345");
+	        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/java_development", "root", "Rahul@2411");
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

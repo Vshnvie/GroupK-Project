@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
+
 public class BuyProduct {
 	CommonMethods cm = new CommonMethods();
 	HashMap<Integer, Integer> cart = new HashMap<>();
@@ -16,19 +17,23 @@ public class BuyProduct {
 	HashMap<Integer, Integer> cartDetails;
 	int availableQty;
 	String productName;
+	int productPrice;
 
 	public void userAddsProductToCart(int productId, int qty) {
 		CommonMethods cm = new CommonMethods();
 		cm.getConnection();
 
-		String query = "select * from products where productId = ?";
+		String query = "select * from products where id = ?";
 
 		try {
 			PreparedStatement ps = cm.getConnection().prepareStatement(query);
 			ps.setInt(1, productId);
 			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
 			availableQty = rs.getInt(5);
 			productName = rs.getString(2);
+			productPrice = rs.getInt(4);
+			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -73,55 +78,48 @@ public class BuyProduct {
 		}
 
 	}
-
-	public HashMap<Integer, Integer> fetchUserHistory(String userName) {
-		String fetchCart = "select * from user_purchase_data where userName = ?";
+	
+	public int getPrice(int productId) {
 		cm.getConnection();
-
+		int price=0;
+		String getPrice = "select price from products where id = ?";
 		try {
-			PreparedStatement ps = cm.getConnection().prepareStatement(fetchCart);
-
-			ps.setString(1, userName);
+			PreparedStatement ps = cm.getConnection().prepareStatement(getPrice);
+			ps.setInt(1, productId);
 			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				cartDetails = new HashMap<>();
-				int productId = rs.getInt(2);
-				int productQty = rs.getInt(3);
-				if (cartDetails.containsKey(rs.getInt(productId))) {
-					productQty = productQty + cartDetails.get(productId);
-					cartDetails.put(productId, productQty);
-				} else {
-					cartDetails.put(productId, productQty);
-				}
-				System.out.println("Product Id added to cart: " + rs.getInt(2));
-				System.out.println("Product qty added to cart: " + rs.getInt(3));
+			while(rs.next()) {
+			price = rs.getInt(1);
+			
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return cartDetails;
+		
+		return price;
 	}
+	
 
-	public void purchaseItem(String userName) {
+	public void insertProductDataIntoTable(String userName) {
 
-		String insertQuery = "insert into user_purchase_data(userName, productId, productQty) " + "values(?,?,?)";
+		String insertQuery = "insert into user_purchase_data(userName, productId, productQty, productPrice) " + "values(?,?,?,?)";
 
 		cm.getConnection();
 		try {
 			PreparedStatement ps = cm.getConnection().prepareStatement(insertQuery);
-			Set s = cart.keySet();
-			Iterator<Integer> itr = s.iterator();
-			while (itr.hasNext()) {
+			Set<Integer> s = cart.keySet();
+			
+			for (Integer i : s) {
 				ps.setString(1, userName);
-				ps.setInt(2, itr.next());
-				ps.setInt(3, cart.get(itr.next()));
+				ps.setInt(4, getPrice(i));
+				ps.setInt(2, i);
+				ps.setInt(3, cart.get(i));
+				
+				
+				ps.execute();
 
 			}
 
-			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

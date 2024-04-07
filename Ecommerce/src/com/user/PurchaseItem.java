@@ -1,37 +1,23 @@
 package com.user;
 
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Scanner;
+
+
+import com.admin.DisplayAmountToUser;
 
 public class PurchaseItem {
+	DisplayAmountToUser dsiplayAmount = new DisplayAmountToUser();
+	Scanner sc = new Scanner(System.in);
 	
-	public void userPurchaseItem(String userName) {
+	public void purchaseItem(String userName) {
 		
-		HashMap<Integer, Integer> qty = new HashMap<>();
-		qty.put(14,10);
-		
-		HashMap<String, HashMap<Integer, Integer>> purchaseItem = new HashMap<>();
-		
-		purchaseItem.put(userName, qty);
-		 
-		HashMap<Integer, Integer> s = purchaseItem.get(userName);
-		
-		Set sv = s.keySet();
-		
-		Iterator itr = sv.iterator();
-		
-		Object i = itr.next();
-		
-		System.out.println(i);
+		dsiplayAmount.displayBillAmount(userName);
 	}
 	
-	public static void main(String [] args) {
-		PurchaseItem pi = new PurchaseItem();
-		pi.userPurchaseItem("Ram");
+	
 	}
 	
 	
 
-}
+
