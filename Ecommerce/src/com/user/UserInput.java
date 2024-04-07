@@ -1,6 +1,6 @@
 package com.user;
 import java.util.Scanner;
-public class User {
+public class UserInput {
 	
 
    private String firstName;
@@ -11,7 +11,7 @@ public class User {
 	    private String email;
 	    private String mobileNumber;
 
-	    public User(String first_Name, String last_Name, String username, String password, String city, String email, String mobile_Number) {
+	    public UserInput(String first_Name, String last_Name, String username, String password, String city, String email, String mobile_Number) {
 	        this.firstName = first_Name;
 	        this.lastName = last_Name;
 	        this.username = username;
@@ -80,7 +80,7 @@ public class User {
 			this.mobileNumber = mobileNumber;
 		}
 
-		public static void addUser(User newUser) {
+		public static void addUser(UserInput newUser) {
 			
 			
 		}

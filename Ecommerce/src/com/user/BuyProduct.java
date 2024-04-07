@@ -8,8 +8,10 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.main.User;
 
-public class BuyProduct {
+
+public class BuyProduct implements User {
 	CommonMethods cm = new CommonMethods();
 	HashMap<Integer, Integer> cart = new HashMap<>();
 	Scanner sc = new Scanner(System.in);
@@ -53,16 +55,16 @@ public class BuyProduct {
 			System.out.println("Item has only " + availableQty + " units avaialble");
 		}
 
-		System.out.println("Do you want to view Cart: Yes/No");
-		String cartInput = sc.next();
-		if (cartInput.equalsIgnoreCase("Yes")) {
-			Set k = cart.keySet();
-			for (Object o : k) {
-				System.out.println("Products in the cart >>" + o);
-				System.out.println("Qty >>" + cart.get(o));
-			}
-
-		}
+//		System.out.println("Do you want to view Cart: Yes/No");
+//		String cartInput = sc.next();
+//		if (cartInput.equalsIgnoreCase("Yes")) {
+//			Set k = cart.keySet();
+//			for (Object o : k) {
+//				System.out.println("Products in the cart >>" + o);
+//				System.out.println("Qty >>" + cart.get(o));
+//			}
+//
+//		}
 
 		System.out.println("Do you want to add any other product: Yes/No");
 		String inputforAddProuct = sc.next();
@@ -115,7 +117,6 @@ public class BuyProduct {
 				ps.setInt(2, i);
 				ps.setInt(3, cart.get(i));
 				
-				
 				ps.execute();
 
 			}
@@ -126,6 +127,78 @@ public class BuyProduct {
 		}
 		System.out.println("cart record inserted successfully");
 
+	}
+
+	@Override
+	public void userRegisteration() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void login(String userName, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewItems() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void purchaseItem(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addProductIntoStore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int calculateBill(String userName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void displayBillAmount(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkQuantity(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkUser(int userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fetchUserHistory(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewItemAsGuest(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void purchaseItemAsGuest() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

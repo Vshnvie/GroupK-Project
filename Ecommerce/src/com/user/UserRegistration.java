@@ -3,11 +3,11 @@ package com.user;
 import java.sql.*;
 import java.util.Scanner;
 
-public class Userregistration {
+public class UserRegistration {
 
 	static CommonMethods cm = new CommonMethods();
 
-	public static void User(int id, String first_name, String last_name, String username, String password, String city,
+	public void user(int id, String first_name, String last_name, String username, String password, String city,
 			String email, int mobile_number) {
 
 		String sql = "INSERT INTO user(id, first_name, last_name, username, password, city, email, mobile_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -36,7 +36,7 @@ public class Userregistration {
 
 	}
 
-	public static boolean validate(String loginUsername, String loginPassword) {
+	public boolean validate(String loginUsername, String loginPassword) {
 
 		String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
 		PreparedStatement statement;
