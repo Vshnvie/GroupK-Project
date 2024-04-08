@@ -28,8 +28,9 @@ public class ViewItemAsGuest implements Guest {
 //			List l = (List) rs;
 //			
 //			Collections.sort(l);
+//			System.out.println(cm.validatProduct(id));
 			
-			if(rs.next()) {
+			if(cm.validatProduct(id)==true) {
 
 			while (rs.next()) {
 				System.out.println("Product Id Is: " + rs.getInt(1));

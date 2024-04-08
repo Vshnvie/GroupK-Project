@@ -48,6 +48,30 @@ public class CommonMethods {
 
 		return false;
 	}
+	
+	public boolean validatProduct(int productId) {
+		
+		String sql = "SELECT * FROM products WHERE id = ?";
+		PreparedStatement statement;
+		try {
+			getConnection();
+			
+			statement = getConnection().prepareStatement(sql);
+
+			statement.setInt(1, productId);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+		
+	}
 
 
 }
