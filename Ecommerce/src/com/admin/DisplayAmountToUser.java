@@ -1,13 +1,21 @@
 package com.admin;
 
+import com.customexceptions.IncorrectUserCredentials;
 import com.main.Admin;
+import com.user.CommonMethods;
 
 public class DisplayAmountToUser implements Admin {
 	CalculateBill cb = new CalculateBill();
+	CommonMethods cm = new CommonMethods();
 	
 public void displayBillAmount(String userName) {
+	
+	if(cm.validate(userName)==true) {
 		
 		System.out.println("Total amount of your bill: "+cb.calculateBill(userName));
+	}else {
+		throw new IncorrectUserCredentials("Incorrect username or password. Please try again.");
+	}
 		
 	}
 

@@ -2,6 +2,7 @@ package com.guest;
 
 import java.util.Scanner;
 
+import com.customexceptions.CanNotPurchaseItemAsGuest;
 import com.main.Guest;
 
 public class PurchaseAsGuest implements Guest {
@@ -19,8 +20,6 @@ public class PurchaseAsGuest implements Guest {
 
 		System.out.println("Do you want to go ahead and purchase this item? " + "Yes/No");
 
-		System.out.println("Please enter your choice");
-
 		String input = sc.next();
 
 		if (input.equalsIgnoreCase("Yes")) {
@@ -29,16 +28,13 @@ public class PurchaseAsGuest implements Guest {
 			System.out.println("Please enter your choice");
 
 			String input1 = sc.next();
-			if (input1.equalsIgnoreCase("Yes")) {
+			if (input1.equalsIgnoreCase("No")) {
+				throw new CanNotPurchaseItemAsGuest("You can not proceed to checkout as Guest. " + "Please register first to complete your purchase.");
 
-			} else {
-				System.out.println("You can not proceed to checkout as Guest.");
-
-				System.out.println("Please register first to complete your purchase.");
 			}
 
 		} else {
-			System.out.println("Thank you for visiting" + " { ecommerce.com } " + "website");
+			System.out.println("Thank you for visiting" + "[ ecommerce.com ]" + "website");
 		}
 
 	}

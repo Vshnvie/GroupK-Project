@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.customexceptions.ProductNotFound;
 import com.main.Guest;
 import com.user.CommonMethods;
 
@@ -27,6 +28,8 @@ public class ViewItemAsGuest implements Guest {
 //			List l = (List) rs;
 //			
 //			Collections.sort(l);
+			
+			if(rs.next()) {
 
 			while (rs.next()) {
 				System.out.println("Product Id Is: " + rs.getInt(1));
@@ -35,6 +38,9 @@ public class ViewItemAsGuest implements Guest {
 				System.out.println("Product Price Is: " + rs.getInt(4));
 				System.out.println("Product Quantity Is: " + rs.getInt(5));
 
+			}
+			} else {
+				throw new ProductNotFound("No Such Product Found");
 			}
 
 		} catch (SQLException e) {

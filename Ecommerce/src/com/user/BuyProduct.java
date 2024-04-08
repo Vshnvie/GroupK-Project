@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.customexceptions.IncorrectUserCredentials;
+import com.customexceptions.ProductNotFound;
+import com.customexceptions.ProductQuantityOutOfStock;
 import com.main.User;
 
 
@@ -20,6 +23,7 @@ public class BuyProduct implements User {
 	int availableQty;
 	String productName;
 	int productPrice;
+	int productId;
 
 	public void userAddsProductToCart(int productId, int qty) {
 		CommonMethods cm = new CommonMethods();
@@ -35,12 +39,15 @@ public class BuyProduct implements User {
 			availableQty = rs.getInt(5);
 			productName = rs.getString(2);
 			productPrice = rs.getInt(4);
+			this.productId = rs.getInt(1);
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if(productId==this.productId) {
 
 		if (cart.get(productId) == null) {
 			qty = qty + 0;
@@ -52,7 +59,7 @@ public class BuyProduct implements User {
 		if (availableQty >= qty) {
 			cart.put(productId, qty);
 		} else {
-			System.out.println("Item has only " + availableQty + " units avaialble");
+			throw new ProductQuantityOutOfStock("Product Out Of Stock. "+"Item has only " + availableQty + " units avaialble.");
 		}
 
 		System.out.println("Do you want to add any other product: Yes/No");
@@ -68,15 +75,57 @@ public class BuyProduct implements User {
 			System.out.println("Do you want to view Cart: Yes/No");
 			String cartInput = sc.next();
 			if (cartInput.equalsIgnoreCase("Yes")) {
-				Set k = cart.keySet();
-				for (Object o : k) {
+				Set<Integer> k = cart.keySet();
+				for (Integer o : k) {
 					System.out.println("Products in the cart >>" + o);
 					System.out.println("Qty >>" + cart.get(o));
+					updateInventory(o, cart.get(o));
 				}
 	
 			}
 		}
+		}else {
+			throw new ProductNotFound("No Such Product Found");
+		}
 
+	}
+	
+	public int getInventory(int productId) {
+		
+		cm.getConnection();
+		int qty=0;
+		String getQty = "select quantity from products where id = ?";
+		try {
+			PreparedStatement ps = cm.getConnection().prepareStatement(getQty);
+			ps.setInt(1, productId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+			qty = rs.getInt(1);
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return qty;	
+	}
+	
+	public void updateInventory(int productId, int purchasedQty) {
+		cm.getConnection();
+		int updatedQty;
+		updatedQty = getInventory(productId) - purchasedQty;
+		String setQty = "update products set quantity = ? where id = ?";
+		try {
+			PreparedStatement ps = cm.getConnection().prepareStatement(setQty);
+			ps.setInt(1, updatedQty);
+			ps.setInt(2, productId);
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	public int getPrice(int productId) {
@@ -127,7 +176,7 @@ public class BuyProduct implements User {
 		}
 		System.out.println("cart record inserted successfully");
 		} else {
-			System.out.println("This user is not registered, Please register first and try again");
+			throw new IncorrectUserCredentials("Incorrect username or password. Please try again.");
 		}
 
 	}

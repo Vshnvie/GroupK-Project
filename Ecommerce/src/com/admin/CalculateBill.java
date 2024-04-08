@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.customexceptions.IncorrectUserCredentials;
 import com.main.Admin;
 import com.user.CommonMethods;
 
@@ -20,6 +21,8 @@ public class CalculateBill implements Admin {
 	String productName;
 	
 	public int calculateBill(String userName) {
+		
+		if(cm.validate(userName)==true) {
 		int totalBill = 0;;
 		String fetchPrice = "select * from user_purchase_data where userName = ?";
 		
@@ -40,7 +43,11 @@ public class CalculateBill implements Admin {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return totalBill;
+		} else {
+			throw new IncorrectUserCredentials("Incorrect username or password. Please try again.");
+		}
 	}
 
 	@Override

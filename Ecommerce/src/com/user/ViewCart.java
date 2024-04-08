@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.customexceptions.IncorrectUserCredentials;
 import com.main.User;
 
 public class ViewCart implements User{
@@ -14,6 +15,8 @@ public class ViewCart implements User{
 	HashMap<Integer, Integer> cartDetails = new HashMap<>();
 	
 	public void viewCart(String userName) {
+		
+		if(cm.validate(userName)==true) {
 
 			String fetchCart = "select * from user_purchase_data where userName = ?";
 			cm.getConnection();
@@ -47,6 +50,9 @@ public class ViewCart implements User{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			throw new IncorrectUserCredentials("Incorrect username or password. Please try again.");
+		}
 
 		
 	}

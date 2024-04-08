@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.customexceptions.NoSuchUserFound;
 import com.main.Admin;
 import com.user.CommonMethods;
 
@@ -42,7 +43,7 @@ public class CheckRegisteredUser implements Admin {
                 System.out.println("Email: " + email);
                 System.out.println("Mobile Number: " + mobileNumber);
             } else {
-                System.out.println("User with ID " + userId + " not found.");
+                throw new NoSuchUserFound("User with ID " + userId + " not found.");
             }
             
         } catch (SQLException e) {

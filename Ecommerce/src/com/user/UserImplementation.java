@@ -1,4 +1,5 @@
 package com.user;
+import com.customexceptions.IncorrectUserCredentials;
 import com.main.*;
 
 import java.util.Scanner;
@@ -46,7 +47,7 @@ public class UserImplementation implements User {
 		if (ur.validate(userName, password)) {
 			System.out.println("Login successful!");
 		} else {
-			System.out.println("Incorrect username or password. Please try again.");
+			throw new IncorrectUserCredentials("Incorrect username or password. Please try again.");
 		}
 	}
 

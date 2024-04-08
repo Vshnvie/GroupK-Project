@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.customexceptions.ProductNotFound;
 import com.main.Admin;
 import com.user.CommonMethods;
 
@@ -26,7 +27,7 @@ public class CheckQuantity implements Admin {
                 int quantity = resultSet.getInt("quantity");
                 System.out.println("Quantity of product with ID " + id + " is: " + quantity);
             } else {
-                System.out.println("Product with ID " + id + " not found.");
+                throw new ProductNotFound("No Such Product Found");
             }
         } catch (SQLException e) {
             e.printStackTrace();

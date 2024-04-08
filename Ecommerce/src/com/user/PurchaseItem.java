@@ -5,15 +5,21 @@ import java.util.Scanner;
 
 
 import com.admin.DisplayAmountToUser;
+import com.customexceptions.IncorrectUserCredentials;
 import com.main.User;
 
 public class PurchaseItem implements User {
 	DisplayAmountToUser dsiplayAmount = new DisplayAmountToUser();
+	CommonMethods cm = new CommonMethods();
 	Scanner sc = new Scanner(System.in);
 	
 	public void purchaseItem(String userName) {
+		if(cm.validate(userName)==true){
 		
 		dsiplayAmount.displayBillAmount(userName);
+		} else {
+			throw new IncorrectUserCredentials("Incorrect username or password. Please try again.");
+		}
 	}
 
 	@Override

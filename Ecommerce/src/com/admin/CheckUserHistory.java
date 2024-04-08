@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.customexceptions.IncorrectUserCredentials;
 import com.main.Admin;
 import com.user.CommonMethods;
 
@@ -12,6 +13,8 @@ public class CheckUserHistory implements Admin {
 	CommonMethods cm = new CommonMethods();
 	
 	public void fetchUserHistory(String userName) {
+		
+		if(cm.validate(userName)==true) {
 		cm.getConnection();
 		
 		String fetchUserHistory = "select productId, description, productQty from products inner join user_purchase_data on products.id = user_purchase_data.productId where userName = ?";
@@ -30,6 +33,9 @@ public class CheckUserHistory implements Admin {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		} else {
+			throw new IncorrectUserCredentials("The user name you have entered is incorrect, Please try again");
 		}
 	}
 
