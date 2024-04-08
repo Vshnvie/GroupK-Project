@@ -6,19 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class CheckRegisteredUser {
-    public static void main(String[] args) {
+import com.customexceptions.NoSuchUserFound;
+import com.main.Admin;
+import com.user.CommonMethods;
+
+public class CheckRegisteredUser implements Admin {
+	
+	CommonMethods cm = new CommonMethods();
+    public void checkUser(int userId) {
         try {
-            Connection connection = Common.getConnection();
+        	cm.getConnection();
 
             String sql = "SELECT * FROM user WHERE id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = cm.getConnection().prepareStatement(sql);
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter user ID: ");
-            int id = scanner.nextInt();
-
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, userId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -29,10 +31,10 @@ public class CheckRegisteredUser {
                 String password = resultSet.getString("password");
                 String city = resultSet.getString("city");
                 String email = resultSet.getString("email");
-                int mobileNumber = resultSet.getInt("mobile_number");
+                long mobileNumber = resultSet.getLong("mobile_number");
                 
                 System.out.println("User Details:");
-                System.out.println("ID: " + id);
+                System.out.println("ID: " + userId);
                 System.out.println("First Name: " + firstName);
                 System.out.println("Last Name: " + lastName);
                 System.out.println("Username: " + username);
@@ -41,11 +43,97 @@ public class CheckRegisteredUser {
                 System.out.println("Email: " + email);
                 System.out.println("Mobile Number: " + mobileNumber);
             } else {
-                System.out.println("User with ID " + id + " not found.");
+                throw new NoSuchUserFound("User with ID " + userId + " not found.");
             }
             
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public void userRegisteration() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void login(String userName, String password) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewItems() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void userAddsProductToCart(int productId, int qty) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void purchaseItem(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewItemAsGuest(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void purchaseItemAsGuest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addProductIntoStore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int calculateBill(String userName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void displayBillAmount(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkQuantity(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fetchUserHistory(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertProductDataIntoTable(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewCart(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
