@@ -7,14 +7,17 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.main.Admin;
+import com.user.CommonMethods;
 
 public class CheckRegisteredUser implements Admin {
+	
+	CommonMethods cm = new CommonMethods();
     public void checkUser(int userId) {
         try {
-            Connection connection = Common.getConnection();
+        	cm.getConnection();
 
             String sql = "SELECT * FROM user WHERE id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = cm.getConnection().prepareStatement(sql);
 
             preparedStatement.setInt(1, userId);
 
@@ -27,7 +30,7 @@ public class CheckRegisteredUser implements Admin {
                 String password = resultSet.getString("password");
                 String city = resultSet.getString("city");
                 String email = resultSet.getString("email");
-                int mobileNumber = resultSet.getInt("mobile_number");
+                long mobileNumber = resultSet.getLong("mobile_number");
                 
                 System.out.println("User Details:");
                 System.out.println("ID: " + userId);
@@ -121,6 +124,12 @@ public class CheckRegisteredUser implements Admin {
 
 	@Override
 	public void insertProductDataIntoTable(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewCart(String userName) {
 		// TODO Auto-generated method stub
 		
 	}

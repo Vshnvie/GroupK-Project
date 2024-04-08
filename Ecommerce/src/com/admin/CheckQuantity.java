@@ -97,5 +97,10 @@ public class CheckQuantity implements Admin {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void viewCart(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

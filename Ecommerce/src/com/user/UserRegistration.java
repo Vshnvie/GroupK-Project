@@ -8,7 +8,7 @@ public class UserRegistration {
 	static CommonMethods cm = new CommonMethods();
 
 	public void user(int id, String first_name, String last_name, String username, String password, String city,
-			String email, int mobile_number) {
+			String email, long mobile_number) {
 
 		String sql = "INSERT INTO user(id, first_name, last_name, username, password, city, email, mobile_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -25,7 +25,7 @@ public class UserRegistration {
 			statement.setString(5, password);
 			statement.setString(6, city);
 			statement.setString(7, email);
-			statement.setInt(8, mobile_number);
+			statement.setLong(8, mobile_number);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

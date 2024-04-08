@@ -55,17 +55,6 @@ public class BuyProduct implements User {
 			System.out.println("Item has only " + availableQty + " units avaialble");
 		}
 
-//		System.out.println("Do you want to view Cart: Yes/No");
-//		String cartInput = sc.next();
-//		if (cartInput.equalsIgnoreCase("Yes")) {
-//			Set k = cart.keySet();
-//			for (Object o : k) {
-//				System.out.println("Products in the cart >>" + o);
-//				System.out.println("Qty >>" + cart.get(o));
-//			}
-//
-//		}
-
 		System.out.println("Do you want to add any other product: Yes/No");
 		String inputforAddProuct = sc.next();
 		if (inputforAddProuct.equalsIgnoreCase("Yes")) {
@@ -76,11 +65,20 @@ public class BuyProduct implements User {
 			int qty2 = sc.nextInt();
 			userAddsProductToCart(productId2, qty2);
 		} else {
-			System.out.println("Products added to the cart");
+			System.out.println("Do you want to view Cart: Yes/No");
+			String cartInput = sc.next();
+			if (cartInput.equalsIgnoreCase("Yes")) {
+				Set k = cart.keySet();
+				for (Object o : k) {
+					System.out.println("Products in the cart >>" + o);
+					System.out.println("Qty >>" + cart.get(o));
+				}
+	
+			}
 		}
 
 	}
-	
+
 	public int getPrice(int productId) {
 		cm.getConnection();
 		int price=0;
@@ -103,6 +101,8 @@ public class BuyProduct implements User {
 	
 
 	public void insertProductDataIntoTable(String userName) {
+		
+		if(cm.validate(userName)==true) {
 
 		String insertQuery = "insert into user_purchase_data(userName, productId, productQty, productPrice) " + "values(?,?,?,?)";
 
@@ -126,6 +126,9 @@ public class BuyProduct implements User {
 			e.printStackTrace();
 		}
 		System.out.println("cart record inserted successfully");
+		} else {
+			System.out.println("This user is not registered, Please register first and try again");
+		}
 
 	}
 
@@ -197,6 +200,12 @@ public class BuyProduct implements User {
 
 	@Override
 	public void purchaseItemAsGuest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewCart(String userName) {
 		// TODO Auto-generated method stub
 		
 	}

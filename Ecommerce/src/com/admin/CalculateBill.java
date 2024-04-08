@@ -16,38 +16,8 @@ public class CalculateBill implements Admin {
 	HashMap<Integer, Integer> cart = new HashMap<>();
 	Scanner sc = new Scanner(System.in);
 	HashMap<String, HashMap<Integer, Integer>> addedProducts = new HashMap<>();
-	HashMap<Integer, Integer> cartDetails;
 	int availableQty;
 	String productName;
-	
-	public HashMap<Integer, Integer> fetchCartDataforUser(String userName) {
-		String fetchCart = "select * from user_purchase_data where userName = ?";
-		cm.getConnection();
-
-		try {
-			PreparedStatement ps = cm.getConnection().prepareStatement(fetchCart);
-
-			ps.setString(1, userName);
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				cartDetails = new HashMap<>();
-				int productId = rs.getInt(2);
-				int productQty = rs.getInt(3);
-				if (cartDetails.containsKey(rs.getInt(3))) {
-					productQty = productQty + cartDetails.get(productId);
-					cartDetails.put(productId, productQty);
-				} else {
-					cartDetails.put(productId, productQty);
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return cartDetails;
-	}
 	
 	public int calculateBill(String userName) {
 		int totalBill = 0;;
@@ -147,6 +117,12 @@ public class CalculateBill implements Admin {
 
 	@Override
 	public void insertProductDataIntoTable(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewCart(String userName) {
 		// TODO Auto-generated method stub
 		
 	}

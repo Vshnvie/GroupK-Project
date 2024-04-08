@@ -34,7 +34,7 @@ public class UserImplementation implements User {
 		String email = scanner.nextLine();
 
 		System.out.println("Enter the mobile number:");
-		int mobileNumber = scanner.nextInt();
+		long mobileNumber = scanner.nextLong();
 
 		ur.user(id, firstName, lastName, username, password, city, email, mobileNumber);
 		System.out.println("User signed up successfully!");
@@ -118,6 +118,12 @@ public class UserImplementation implements User {
 
 	@Override
 	public void insertProductDataIntoTable(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void viewCart(String userName) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -39,6 +39,8 @@ public class Products implements Admin {
             int qty = sc.nextInt();
             statement.setInt(5, qty);
             
+            statement.execute();
+            
             
             
         } catch (Exception e) {
@@ -108,6 +110,11 @@ public class Products implements Admin {
 	}
 	@Override
 	public void insertProductDataIntoTable(String userName) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void viewCart(String userName) {
 		// TODO Auto-generated method stub
 		
 	}

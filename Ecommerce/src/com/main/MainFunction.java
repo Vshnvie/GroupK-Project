@@ -21,6 +21,7 @@ public class MainFunction {
 	User purchaseItem = new PurchaseItem();
 	User userImplementation = new UserImplementation();
 	User viewItem = new ViewItem();
+	User viewCart = new ViewCart();
 	
 	Guest purchaseAsGuest = new PurchaseAsGuest();
 	Guest viewItemAsGuest = new ViewItemAsGuest();
@@ -51,6 +52,11 @@ public class MainFunction {
 			System.out.println("Please Enter Your Username to Proceed with Purchase");
 			String userName1 = sc.next();
 			buyProduct.insertProductDataIntoTable(userName1);
+			break;
+		case 5 :
+			System.out.println("Please Enter your username");
+			String username5 = sc.next();
+			viewCart.viewCart(username5);
 			break;
 		case 6 :
 			System.out.println("Please Enter Your Username to Proceed with Purchase");

@@ -89,6 +89,12 @@ public void insertProductDataIntoTable(String userName) {
 	
 }
 
+@Override
+public void viewCart(String userName) {
+	// TODO Auto-generated method stub
+	
+}
+
 
 
 }

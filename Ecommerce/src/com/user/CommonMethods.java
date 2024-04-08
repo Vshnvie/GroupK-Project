@@ -2,6 +2,8 @@ package com.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CommonMethods {
@@ -23,5 +25,29 @@ public class CommonMethods {
 		
 		return connection;
 	}
+	
+	public boolean validate(String loginUsername) {
+
+		String sql = "SELECT * FROM user WHERE username = ?";
+		PreparedStatement statement;
+		try {
+			getConnection();
+			
+			statement = getConnection().prepareStatement(sql);
+
+			statement.setString(1, loginUsername);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 
 }

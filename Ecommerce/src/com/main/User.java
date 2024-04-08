@@ -10,6 +10,8 @@ public interface User extends Main {
 	
 	public void userAddsProductToCart(int productId, int qty);
 	
+	public void viewCart(String userName);
+	
 	public void purchaseItem(String userName);
 
 
